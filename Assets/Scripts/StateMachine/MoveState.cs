@@ -6,7 +6,7 @@ public class MoveState : BaseState
     public override void Enter()
     {
         owner.FindClosestEnemy();
-        if ( Vector3.Distance(owner.transform.position, owner.targetEnemy.transform.position) < 1f )
+        if ( Vector3.Distance(owner.transform.position, owner.targetEnemy.transform.position) > 1f )
         {
             owner.PlayAni("Move");
         }
@@ -37,7 +37,7 @@ public class MoveState : BaseState
         if ( owner.targetEnemy == null ) return;
 
         // 적의 위치로 이동
-        Vector3 direction = ( owner.targetEnemy.transform.position - owner.transform.position ).normalized;
+        FlipCharacter();
         owner.transform.position = Vector3.MoveTowards(owner.transform.position, owner.targetEnemy.transform.position, 5f * Time.deltaTime);  // 5f는 이동 속도
     }
 

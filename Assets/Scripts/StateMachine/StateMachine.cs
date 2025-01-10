@@ -33,7 +33,15 @@ using System.Collections.Generic;
             curState = entry;
             stateDic [entry].Enter();
         }
-
+    public BaseState FindState(string key)
+    {
+        foreach( var stat in stateDic )
+        {
+            if ( key == stat.Key )
+                return stat.Value;
+        }
+        return null;
+    }
         public void Update()
         {
             stateDic [curState].Update();

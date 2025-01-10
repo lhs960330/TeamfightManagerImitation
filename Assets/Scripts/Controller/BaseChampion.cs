@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum ChampionState { Idle, Move, Attack, Die }
+public enum ChampionState { Idle, Move, Attack, Kiting, Die }
 
 
 public class BaseChampion : MonoBehaviour
@@ -33,13 +33,16 @@ public class BaseChampion : MonoBehaviour
     }
     private void Awake()
     {
-        // 한번만 실행하면되는것들 (컴포넌트를 찾아서 넣거나, 상태들을 넣어줄때)
+        fsm = new StateMachine();
+        animator = GetComponent<Animator>();
+    }
+    private void Start()
+    {
         Init();
+        fsm.Init("Idle");
     }
     protected virtual void Init()
     {
-        fsm = new StateMachine();
-        animator = GetComponent<Animator>();
         // data = GetComponent<ChampionData>();
         // hp = data.maxHp;
 
@@ -48,7 +51,6 @@ public class BaseChampion : MonoBehaviour
         fsm.AddState("Attack", new AttackState(this));
 
         fsm.AddState("Die", new DieState(this));
-        fsm.Init("Idle");
         fsm.AddAnyState("Die", () => hp <= 0);
     }
     public void TakeHit( int damage )
@@ -92,6 +94,5 @@ public class BaseChampion : MonoBehaviour
         curAnimationTime = animator.GetCurrentAnimatorStateInfo(0).length;
     }
     public float curAnimationTime;
-    bool IsAttac = true;
 
 }
