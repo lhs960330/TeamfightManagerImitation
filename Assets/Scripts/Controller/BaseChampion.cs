@@ -8,8 +8,8 @@ public class BaseChampion : MonoBehaviour
 {
     [SerializeField] protected int hp;  // 체력
     //[SerializeField] ChampionData data;
-    [SerializeField] protected NewClass.StateMachine fsm = new NewClass.StateMachine();         // 상태머신
-    
+    [SerializeField] protected StateMachine fsm;         // 상태머신
+    public StateMachine Fsm { get { return fsm; } }
     Animator animator;
     private void Update()
     {
@@ -29,33 +29,69 @@ public class BaseChampion : MonoBehaviour
     private void OnEnable()
     {
         // 비활성화 되었다가 활성화될떄 바꿔줘야되는거 예)HP, 스폰 장소, 등
-      //  hp = data.hp;
+        //  hp = data.hp;
     }
     private void Awake()
     {
-        // 한번만 실행하면되는것들 (컴포넌트를 찾아서 넣거나, 상태들을 넣어줄때
+        // 한번만 실행하면되는것들 (컴포넌트를 찾아서 넣거나, 상태들을 넣어줄때)
         Init();
-    }
-    public virtual void FindEnemy()
-    {
-        
     }
     protected virtual void Init()
     {
+        fsm = new StateMachine();
         animator = GetComponent<Animator>();
         // data = GetComponent<ChampionData>();
         // hp = data.maxHp;
 
-        fsm.AddState("Idle", new NewClass.IdleState(this));
+        fsm.AddState("Idle", new IdleState(this));
+        fsm.AddState("Move", new MoveState(this));
+        fsm.AddState("Attack", new AttackState(this));
 
-        fsm.AddState("Die", new NewClass.DieState(this));
+        fsm.AddState("Die", new DieState(this));
         fsm.Init("Idle");
         fsm.AddAnyState("Die", () => hp <= 0);
-
     }
     public void TakeHit( int damage )
     {
         hp -= damage;
     }
+    public void ChangeState( string state )
+    {
+        fsm.ChangeState(state); // fsm의 내부 로직을 직접 사용하지 않도록 캡슐화
+    }
+    [SerializeField] protected List<BaseChampion> enemys = new List<BaseChampion>();
+    public virtual void FindEnemy()
+    {
+        // 게임 매니저에서 찾아와서 해야됨
+
+    }
+    public bool HasEnemyInRange()
+    {
+        // 척이 있는지 없는 확인
+        if ( enemys.Count == 0 ) return false;
+
+        return true;
+    }
+    public BaseChampion targetEnemy;
+    public void FindClosestEnemy()
+    {
+        float closestDistance = float.MaxValue;
+        foreach ( var enemy in enemys )
+        {
+            float distance = Vector3.Distance(transform.position, enemy.transform.position);
+            if ( distance < closestDistance )
+            {
+                closestDistance = distance;
+                targetEnemy = enemy;
+            }
+        }
+    }
+    public void PlayAni( string aniName )
+    {
+        animator.Play(aniName);
+        curAnimationTime = animator.GetCurrentAnimatorStateInfo(0).length;
+    }
+    public float curAnimationTime;
+    bool IsAttac = true;
 
 }

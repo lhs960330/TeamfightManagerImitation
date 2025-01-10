@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 
-namespace NewClass
-{
     public class StateMachine
     {
         public string curState { get; private set; }
@@ -88,4 +86,3 @@ namespace NewClass
             this.condition = condition;
         }
     }
-}

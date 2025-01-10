@@ -1,26 +1,20 @@
 using System.Collections;
 using UnityEngine;
-namespace NewClass
+public class DieState : BaseState
 {
-    public class DieState : BaseState
+    protected Coroutine routine;
+
+    public DieState( BaseChampion owner ) : base(owner) { }
+
+    public override void Enter()
     {
-        private BaseChampion owner;
-        private Coroutine routine;
+        owner.PlayAni("Die");
+        routine = owner.StartCoroutine(DieRoutine());
+    }
 
-        public DieState( BaseChampion owner )
-        {
-            this.owner = owner;
-        }
-
-        public override void Enter()
-        {
-            routine = owner.StartCoroutine(DieRoutine());
-        }
-
-        IEnumerator DieRoutine()
-        {
-            yield return new WaitForSeconds(1);
-            GameObject.Destroy(owner.gameObject);
-        }
+    IEnumerator DieRoutine()
+    {
+        yield return new WaitForSeconds(owner.curAnimationTime);
+        GameObject.Destroy(owner.gameObject);
     }
 }
