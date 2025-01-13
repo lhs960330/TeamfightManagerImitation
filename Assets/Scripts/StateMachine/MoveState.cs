@@ -20,7 +20,7 @@ public class MoveState : BaseState
         if ( owner.targetEnemy != null )
         {
             // 적에게 도달했으면 Attack 상태로 전환 3f는 사거리 정해지면 그때 변경
-            if ( Vector3.Distance(owner.transform.position, owner.targetEnemy.transform.position) < 1f )
+            if ( Vector3.Distance(owner.transform.position, owner.targetEnemy.transform.position) < owner.Data.attackRange )
             {
                 owner.ChangeState("Attack");  // 공격 상태로 전환
             }
@@ -38,7 +38,7 @@ public class MoveState : BaseState
 
         // 적의 위치로 이동
         FlipCharacter();
-        owner.transform.position = Vector3.MoveTowards(owner.transform.position, owner.targetEnemy.transform.position, 5f * Time.deltaTime);  // 5f는 이동 속도
+        owner.transform.position = Vector3.MoveTowards(owner.transform.position, owner.targetEnemy.transform.position, owner.Data.movementSpeed * Time.deltaTime);  // 5f는 이동 속도
     }
 
 }

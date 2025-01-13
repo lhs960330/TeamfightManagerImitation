@@ -53,12 +53,11 @@ public class KitingState : BaseState
 
     private void MoveAwayFromEnemy()
     {
+        // 벽을 만났을때는 따로 설정 
         owner.PlayAni("Move");
         // 적과 반대 방향으로 이동
         Vector3 directionAwayFromEnemy = ( owner.transform.position - owner.targetEnemy.transform.position ).normalized;
-        owner.transform.position += directionAwayFromEnemy * 6f * Time.deltaTime;
+        owner.transform.position += directionAwayFromEnemy * owner.Data.movementSpeed * Time.deltaTime;
         FlipCharacter(true);
-
-        Debug.Log("카이팅 중: 적과 반대 방향으로 이동");
     }
 }

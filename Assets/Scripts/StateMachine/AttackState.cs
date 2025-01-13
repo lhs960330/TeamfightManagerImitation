@@ -12,7 +12,6 @@ public class AttackState : BaseState
         // 카이팅하는 캐릭터인지 확인
         if ( owner.Fsm.FindState("Kiting") != null )
         {
-            Debug.Log(owner.gameObject.name);
             isKiting = true;
         }
         // 공격 애니메이션의 딜레이를 관리하는 코루틴을 시작
@@ -33,11 +32,11 @@ public class AttackState : BaseState
         {
 
             // 상대가 있고 사거리안에 있을때 발동
-            if ( owner.targetEnemy != null && Vector3.Distance(owner.transform.position, owner.targetEnemy.transform.position) < 1f )
+            if ( owner.targetEnemy != null && Vector3.Distance(owner.transform.position, owner.targetEnemy.transform.position) < owner.Data.attackRange )
             {
                 owner.PlayAni("Attack");
-                // 예시로 데미지 주기
-                owner.targetEnemy.TakeHit(3);  // 데미지 10을 줌
+                // 현재 적이 하나여서 BaseChanmpion에서 적을 가지고있는 상태이다. 나중에 매니저가 적과 아군에 데이터를 가지고 있어 그걸 이용하는게 맞는거 같다.
+                owner.targetEnemy.TakeHit(owner.targetEnemy.Data.attackPower);  // 데미지 10을 줌
             }
             else
             {

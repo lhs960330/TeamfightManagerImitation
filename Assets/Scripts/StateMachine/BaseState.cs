@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-public class BaseState
+abstract public class BaseState
 {
     public List<Transition> transitions;
     protected BaseChampion owner;
@@ -23,4 +23,5 @@ public class BaseState
         bool shouldFlip = ( direction.x < 0 ) != isReverse;  // isReverse 여부에 따라 반전 여부 결정
         renderer.flipX = shouldFlip;
     }
+
 }
