@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-public enum ChampionState { Idle, Move, Attack, Kiting, Wall, Die }
-
-
+using UnityEngine;  
 public class BaseChampion : MonoBehaviour
 {
     [SerializeField] protected int hp;  // 체력
@@ -45,9 +42,6 @@ public class BaseChampion : MonoBehaviour
     }
     protected virtual void Init()
     {
-        // data = GetComponent<ChampionData>();
-        // hp = data.maxHp;
-
         fsm.AddState("Idle", new IdleState(this));
         fsm.AddState("Move", new MoveState(this));
         fsm.AddState("Attack", new AttackState(this));
@@ -57,7 +51,6 @@ public class BaseChampion : MonoBehaviour
 
         // 원본을 사용하지 않기위해 원본을 복사해서 사용
         data = Instantiate(Manager.Resource.Load<ChampionData>($"Champions/Data/{gameObject.name}"));
-        // 나무위키에 나온 스탯으로하면 이동속도가 너무 빠르고 사거리도 너무 길어져 그 수치대로 기준을 잡고 조금 낮추었다.
         data.Init();
         hp = data.maxHp;
     }
@@ -77,6 +70,7 @@ public class BaseChampion : MonoBehaviour
     {
         fsm.ChangeState(state); // fsm의 내부 로직을 직접 사용하지 않도록 캡슐화
     }
+    // 게임 매니저에서 할 예정
     [SerializeField] protected List<BaseChampion> enemys = new List<BaseChampion>();
     public virtual void FindEnemy()
     {

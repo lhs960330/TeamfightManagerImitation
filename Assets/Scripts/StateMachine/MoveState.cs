@@ -6,7 +6,7 @@ public class MoveState : BaseState
     public override void Enter()
     {
         owner.FindClosestEnemy();
-        if ( Vector3.Distance(owner.transform.position, owner.targetEnemy.transform.position) > 1f )
+        if ( Vector3.Distance(owner.transform.position, owner.targetEnemy.transform.position) > owner.Data.attackRange )
         {
             owner.PlayAni("Move");
         }

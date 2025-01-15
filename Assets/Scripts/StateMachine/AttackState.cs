@@ -48,7 +48,7 @@ public class AttackState : BaseState
             if ( isKiting )
             {
                 float distanceToEnemy = Vector3.Distance(owner.transform.position, owner.targetEnemy.transform.position);
-                if ( distanceToEnemy < 1.5f )
+                if ( distanceToEnemy < owner.Data.attackRange )
                 {
                     owner.ChangeState("Kiting");
                 }
