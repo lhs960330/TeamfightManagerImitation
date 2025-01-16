@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6730099769273346301}
   - component: {fileID: 5278759953238771438}
   - component: {fileID: 8548383111743984911}
+  - component: {fileID: 8049008585278219292}
   m_Layer: 8
   m_Name: fighter
   m_TagString: Untagged
@@ -147,7 +148,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -180,3 +181,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8049008585278219292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3675998573341682190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2480fe36113552d41b8a35b39806d735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 0
+  data: {fileID: 11400000, guid: 6daabf4ac311c904fae8c061074fc9bf, type: 2}
+  enemys: []
+  targetEnemy: {fileID: 0}
+  curAnimationTime: 0

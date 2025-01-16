@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3272218106679047989}
   - component: {fileID: 5961341800054664561}
   - component: {fileID: 3345839543349677850}
+  - component: {fileID: 6224132380331923904}
   m_Layer: 8
   m_Name: archer
   m_TagString: Champion
@@ -181,6 +182,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6224132380331923904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8190449440689917571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc566ae69453b0247a81e6c34be73a51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 0
+  data: {fileID: 11400000, guid: 75f3637eaa119124da4bbff30f6596e7, type: 2}
+  enemys: []
+  targetEnemy: {fileID: 0}
+  curAnimationTime: 0
 --- !u!1 &8950355320317244040
 GameObject:
   m_ObjectHideFlags: 0

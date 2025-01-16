@@ -50,7 +50,6 @@ public class BaseChampion : MonoBehaviour
         fsm.AddAnyState("Die", () => hp <= 0);
 
         // 원본을 사용하지 않기위해 원본을 복사해서 사용
-        data = Instantiate(Manager.Resource.Load<ChampionData>($"Champions/Data/{gameObject.name}"));
         data.Init();
         hp = data.maxHp;
     }

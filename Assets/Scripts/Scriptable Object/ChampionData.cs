@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewChampionStats", menuName = "Game/Champion Stats")]
 public class ChampionData : ScriptableObject
 {
-    public ChampionName name;
+    public Define.ChampionName name;
     public int maxHp;
     public int attackPower;
     public int armor;
